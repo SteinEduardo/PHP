@@ -1,0 +1,14 @@
+CREATE DATABASE crudBd;
+USE crudBd;
+
+CREATE TABLE usuarios 
+(
+	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) NOT NULL,
+    nascimento DATE NOT NULL,
+    tel VARCHAR(15),
+    email VARCHAR(50)
+);
+
+SELECT * FROM usuarios;
