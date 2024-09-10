@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Básico</title>
+</head>
+<body>
+    <h1>CRUD - Básico</h1>
+
+    <div>
+        <form action="../php/crud.php" method="POST">
+            <p>Cadastro</p>
+            <p>Nome completo: <input type="text" name="nome"></p>
+            <p>CPF: <input type="number" name="cpf"></p>
+            <p>Data de nascimento: <input type="date" name="nascimento"></p>
+            <p>Telefone para contato: <input type="tel" name="tel"></p>
+            <p>E-mail: <input type="email" name="email"></p>
+
+            <button type="submit" name="acao" value="cadastrar">Cadastrar</button>
+            <button type="submit" name="acao" value="pesquisar">Pesquisar</button>
+        </form>
+    </div>
+</body>
+</html>
