@@ -17,25 +17,37 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
-        $acao = $_POST['acao'];
+        $acao = $_POST['acao'] ?? null;
 
-        if ($acao == "cadastrar") 
-        {
-            $nome = $conexao->real_escape_string($_POST['nome']);
-            $cpf = $conexao->real_escape_string($_POST['cpf']);
-            $nascimento = $conexao->real_escape_string($_POST['nascimento']);
-            $tel = $conexao->real_escape_string($_POST['tel']);
-            $email = $conexao->real_escape_string($_POST['email']);
+        // Certifique-se de que 'acao' está sendo enviado
+        if (!$acao) {
+            http_response_code(400);
+            echo "Ação não fornecida.";
+            exit();
+        }
 
+        if ($acao == "cadastrar") {
+            $nome = $conexao->real_escape_string($_POST['nome'] ?? '');
+            $cpf = $conexao->real_escape_string($_POST['cpf'] ?? '');
+            $nascimento = $conexao->real_escape_string($_POST['nascimento'] ?? '');
+            $tel = $conexao->real_escape_string($_POST['tel'] ?? '');
+            $email = $conexao->real_escape_string($_POST['email'] ?? '');
+        
+            // Validação dos campos obrigatórios
+            if (empty($nome) || empty($cpf) || empty($nascimento) || empty($tel)) {
+                http_response_code(400); // Resposta de erro 400
+                echo "Por favor, preencha todos os campos obrigatórios.";
+                exit();
+            }
+        
             $queryInsert = "INSERT INTO usuarios (nome, cpf, nascimento, tel, email)
                             VALUES ('$nome', '$cpf', '$nascimento', '$tel', '$email')";
-
-            if ($conexao->query($queryInsert) === TRUE) 
-            {
-                echo "Cadastro realizado com sucesso";
-            } 
-            else 
-            {
+        
+            if ($conexao->query($queryInsert) === TRUE) {
+                http_response_code(200);
+                echo "Cadastro realizado com sucesso!";
+            } else {
+                http_response_code(500);
                 echo "Erro ao cadastrar: " . $conexao->error;
             }
         }
