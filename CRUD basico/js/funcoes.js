@@ -1,5 +1,5 @@
-// js/funcoes.js
-function cadastrarUsuario(event) {
+function cadastrarUsuario(event) 
+{
     event.preventDefault();
 
     var formData = new FormData(document.forms["formCadastro"]);
