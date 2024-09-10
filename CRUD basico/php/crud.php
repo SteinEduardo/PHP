@@ -13,7 +13,7 @@
     if ($conexao->connect_error) 
     {
         die("Falha na conexão: " . $conexao->connect_error);
-    }
+    } 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
@@ -51,7 +51,6 @@
             {
                 $row = $result->fetch_assoc();
 
-                // Redireciona para pesquisa.php com os dados da pesquisa
                 header("Location: ../php/pesquisa.php?nome_completo=" . urlencode($row['nome']) . "&cpf=" . urlencode($row['cpf']) .
                        "&data_nascimento=" . urlencode($row['nascimento']) . "&telefone=" . urlencode($row['tel']) .
                        "&email=" . urlencode($row['email']));
@@ -70,12 +69,11 @@
 
             if ($result->num_rows > 0) 
             {
-                // Redireciona para pesquisa.php com todos os dados
                 $data = [];
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) 
+                {
                     $data[] = $row;
                 }
-                // Codifica os dados em JSON e adiciona à URL
                 $dataJson = urlencode(json_encode($data));
                 header("Location: ../php/pesquisa.php?data=$dataJson");
                 exit();
@@ -101,9 +99,29 @@
                 echo "Erro ao excluir usuário: " . $conexao->error;
             }
 
-            // Redireciona para pesquisa.php para atualizar a visualização após exclusão
             header("Location: ../php/pesquisa.php?acao=pesquisarTudo");
             exit();
+        }
+
+        if ($acao == "atualizar") 
+        {
+            $nome = $conexao->real_escape_string($_POST['nome']);
+            $cpf = $conexao->real_escape_string($_POST['cpf']);
+            $nascimento = $conexao->real_escape_string($_POST['nascimento']);
+            $tel = $conexao->real_escape_string($_POST['tel']);
+            $email = $conexao->real_escape_string($_POST['email']);
+
+            $queryUpdate = "UPDATE usuarios SET nome='$nome', nascimento='$nascimento', tel='$tel', email='$email' WHERE cpf='$cpf'";
+
+            if ($conexao->query($queryUpdate) === TRUE) 
+            {
+                header("Location: pesquisa.php");
+                exit();
+            } 
+            else 
+            {
+                echo "Erro ao atualizar: " . $conexao->error;
+            }
         }
     }
 ?>
