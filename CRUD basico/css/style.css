@@ -1,0 +1,17 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    
+}
+
+.form-input 
+{
+    margin-bottom: 1em;
+}
+
+.form-input input[type="text"], .form-input input[type="date"], .form-input input[type="tel"], .form-input input[type="email"] 
+{
+    width: 100%;
+    padding: 0.5em;
+}

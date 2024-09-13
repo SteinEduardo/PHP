@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Editar Usuário</title>
+<!--
     <style>
         form {
             margin-bottom: 1em;
@@ -16,6 +18,8 @@
             padding: 0.5em;
         }
     </style>
+-->
+
 </head>
 <body>
     <h1>Editar Usuário</h1>
@@ -54,16 +58,19 @@
         }
     ?>
 
-    <form action="crud.php" method="POST">
-        <p>Nome completo: <input type="text" name="nome" value="<?php echo htmlspecialchars($row['nome']); ?>"></p>
-        <p>CPF: <input type="text" name="cpf" value="<?php echo htmlspecialchars($row['cpf']); ?>" readonly></p>
-        <p>Data de nascimento: <input type="date" name="nascimento" value="<?php echo htmlspecialchars($row['nascimento']); ?>"></p>
-        <p>Telefone para contato: <input type="tel" name="tel" value="<?php echo htmlspecialchars($row['tel']); ?>"></p>
-        <p>E-mail: <input type="email" name="email" value="<?php echo htmlspecialchars($row['email']); ?>"></p>
+<form action="crud.php" method="POST" class="form-input">
+    <p>Nome completo: <input type="text" name="nome" value="<?php echo htmlspecialchars($row['nome']); ?>"></p>
+    <p>CPF: <input type="text" name="cpf" value="<?php echo htmlspecialchars($row['cpf']); ?>" readonly></p>
+    <p>Data de nascimento: <input type="date" name="nascimento" value="<?php echo htmlspecialchars($row['nascimento']); ?>"></p>
+    <p>Telefone para contato: <input type="tel" name="tel" value="<?php echo htmlspecialchars($row['tel']); ?>"></p>
+    <p>E-mail: <input type="email" name="email" value="<?php echo htmlspecialchars($row['email']); ?>"></p>
 
-        <button type="submit" name="acao" value="atualizar">Salvar</button>
-    </form>
+    <button type="submit" name="acao" value="atualizar">Salvar</button>
+</form>
 
-    <a href="pesquisa.php">Voltar</a>
+    <button>
+        <a href="pesquisa.php">Voltar</a>
+    </button>
+    
 </body>
 </html>
